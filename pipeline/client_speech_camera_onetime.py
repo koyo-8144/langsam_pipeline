@@ -121,6 +121,7 @@ files = {
 #     print(f"Error: {response.status_code}")
 #     print(response.text)
 
+
 # Send the POST request
 response = requests.post(url, files=files)
 
