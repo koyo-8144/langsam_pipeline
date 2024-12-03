@@ -96,31 +96,6 @@ files = {
     "image": ("image.png", buffer.tobytes(), "image/png")
 }
 
-# # Send the POST request
-# response = requests.post(url, files=files)
-
-# # Check if the response is successful
-# if response.status_code == 200:
-#     # Convert the output image bytes to a numpy array
-#     nparr = np.frombuffer(response.content, np.uint8)
-#     output_image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-
-#     # Define the directory to save output images
-#     save_dir = "image_files"
-#     os.makedirs(save_dir, exist_ok=True)
-
-#     # Save the output image
-#     output_path = os.path.join(save_dir, "processed_output.png")
-#     cv2.imwrite(output_path, output_image)
-#     print(f"Processed output saved as {output_path}")
-
-#     # Optionally display the output image
-#     # cv2.imshow("Processed Output", output_image)
-#     # cv2.waitKey(0)  # Wait for a key press to close the image
-# else:
-#     print(f"Error: {response.status_code}")
-#     print(response.text)
-
 
 # Send the POST request
 response = requests.post(url, files=files)
@@ -130,28 +105,10 @@ if response.status_code == 200:
     # Parse the JSON response
     response_json = response.json()
 
-    # Decode the base64-encoded image
-    img_data = base64.b64decode(response_json["output_image"])
-    img_array = np.frombuffer(img_data, dtype=np.uint8)
-    output_image = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-
-    # Define the directory to save output images
-    save_dir = "image_files"
-    os.makedirs(save_dir, exist_ok=True)
-
-    # Save the output image
-    output_path = os.path.join(save_dir, "processed_output.png")
-    cv2.imwrite(output_path, output_image)
-    print(f"Processed output saved as {output_path}")
-
-    # Optionally display the output image
-    # cv2.imshow("Processed Output", output_image)
-    # cv2.waitKey(0)  # Wait for a key press to close the image
-
     # Get the object coordinates from the response
     object_coordinates = response_json["object_coordinates"]
     object_coordinates = np.array(object_coordinates)
-    # print(f"Object coordinates: {object_coordinates}")
+    print(f"Object coordinates: {object_coordinates}")
 
     # Separate x and y coordinates
     x_coords = object_coordinates[:, 0]
