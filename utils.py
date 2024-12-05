@@ -13,7 +13,7 @@ def load_image(image_path: str):
 def draw_image(image_rgb, masks, xyxy, probs, labels):
     # print("masks: ", masks) # whole zero
     # print("masks type: ", type(masks)) # <class 'numpy.ndarray'>
-    print("masks shape: ", masks.shape) # (1, 480, 640) when it detects "one" object
+    # print("masks shape: ", masks.shape) # (1, 480, 640) when it detects "one" object
     # print(f"Min pixel value: {masks.min()}, Max pixel value: {masks.max()}") # Min pixel value: 0.0, Max pixel value: 1.0
 
     box_annotator = sv.BoxCornerAnnotator()
