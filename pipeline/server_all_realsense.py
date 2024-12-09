@@ -194,17 +194,19 @@ class LangSAMAPI(ls.LitAPI):
 
 
 lit_api = LangSAMAPI()
+# lit_api.setup(device="cuda")  # or "cuda" if available
 server = ls.LitServer(lit_api)
 
 # Define the POST endpoint for prediction
 @app.post("/predict")
-async def predict(
+async def predict(  
     sam_type: str = Form(...),
     box_threshold: float = Form(0.3),
     text_threshold: float = Form(0.25),
     text_prompt: str = Form(...),
     image: UploadFile = Form(...)
 ):
+    print('predict endpoint')
     inputs = {
         "sam_type": sam_type,
         "box_threshold": box_threshold,
@@ -220,4 +222,4 @@ async def predict(
 
 if __name__ == "__main__":
     print(f"Starting LitServe and Gradio server on port {PORT}...")
-    server.run(port=PORT)
+    server.run(port=PORT, log_level="trace")
